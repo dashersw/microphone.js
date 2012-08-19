@@ -58,7 +58,7 @@ package {
                 mic.addEventListener(ActivityEvent.ACTIVITY,activityHandler);
                 mic.codec = SoundCodec.NELLYMOSER;
                 mic.setLoopBack(false);
-                mic.gain = options.gain;
+                mic.gain = 50;
 
                 ExternalInterface.addCallback("setMic", setMic);
                 ExternalInterface.addCallback("getMicrophoneList", getMicrophoneList);
