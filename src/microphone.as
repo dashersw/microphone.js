@@ -59,7 +59,7 @@ package {
                 mic.codec = SoundCodec.NELLYMOSER;
                 mic.setSilenceLevel(0, 10000);
                 mic.setLoopBack(false);
-                mic.gain = 50;
+                mic.gain = options.gain;
                 
            		ExternalInterface.addCallback("setMic", setMic);
     			ExternalInterface.addCallback("getMicrophoneList", getMicrophoneList);
