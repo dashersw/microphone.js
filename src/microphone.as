@@ -57,7 +57,6 @@ package {
                 mic.addEventListener(StatusEvent.STATUS,statusHandler);
                 mic.addEventListener(ActivityEvent.ACTIVITY,activityHandler);
                 mic.codec = SoundCodec.NELLYMOSER;
-                mic.setSilenceLevel(0, 10000);
                 mic.setLoopBack(false);
                 mic.gain = options.gain;
 
