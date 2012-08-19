@@ -1,8 +1,8 @@
 /*
-	microphone.as
-	Morteza Milani (mrtz.milani@googlemail.com)
-	https://github.com/milani/microphone.js
-	Published under MIT license
+    microphone.as
+    Morteza Milani (mrtz.milani@googlemail.com)
+    https://github.com/milani/microphone.js
+    Published under MIT license
 */
 package {
     import flash.display.Sprite;
@@ -60,18 +60,18 @@ package {
                 mic.setSilenceLevel(0, 10000);
                 mic.setLoopBack(false);
                 mic.gain = options.gain;
+
+                ExternalInterface.addCallback("setMic", setMic);
+                ExternalInterface.addCallback("getMicrophoneList", getMicrophoneList);
+                ExternalInterface.addCallback("getName", getName);
+                ExternalInterface.addCallback("setQuality", setQuality);
+                ExternalInterface.addCallback("setGain", setGain);
+                ExternalInterface.addCallback("setRate", setRate);
+                ExternalInterface.addCallback("getRate", getRate);
+                ExternalInterface.addCallback("enableLoopback", enableLoopback);
+                ExternalInterface.addCallback("start", start);
+                ExternalInterface.addCallback("stop", stop);
                 
-           		ExternalInterface.addCallback("setMic", setMic);
-    			ExternalInterface.addCallback("getMicrophoneList", getMicrophoneList);
-    			ExternalInterface.addCallback("getName", getName);
-    			ExternalInterface.addCallback("setQuality", setQuality);
-    			ExternalInterface.addCallback("setGain", setGain);
-    			ExternalInterface.addCallback("setRate", setRate);
-    			ExternalInterface.addCallback("getRate", getRate);
-    			ExternalInterface.addCallback("enableLoopback", enableLoopback);
-    			ExternalInterface.addCallback("start", start);
-    			ExternalInterface.addCallback("stop", stop);
-    			
             }else if(Microphone.isSupported === false){
                 this.error(1,"Microphone usage is not supported.");
                 this.log("Microphone usage is not supported.");
@@ -101,14 +101,14 @@ package {
         }
         
         public function streamHandler(event:SampleDataEvent):void {
-			var data:Array = new Array();
-			while(event.data.bytesAvailable){
-			    var sample:Number = event.data.readFloat();
-			    data.push(sample);
-			}
-			ExternalInterface.call(JSObject + '.data', id, data);
-		}
-		
+            var data:Array = new Array();
+            while(event.data.bytesAvailable){
+                var sample:Number = event.data.readFloat();
+                data.push(sample);
+            }
+            ExternalInterface.call(JSObject + '.data', id, data);
+        }
+
         public function enableLoopback(state:Boolean):void{
             mic.setLoopBack(state);
         }
@@ -144,10 +144,10 @@ package {
         public function getMicrophoneList():Array{
             var list:Array = new Array();
 
-		    for (var i:Number = 0, l:Number = Microphone.names.length; i < l; i++) {
-			    list[i] = Microphone.names[i];
-		    }
-		    return list;
+            for (var i:Number = 0, l:Number = Microphone.names.length; i < l; i++) {
+                list[i] = Microphone.names[i];
+            }
+            return list;
         }
         
         public function error(code:Number,message:String):void{
